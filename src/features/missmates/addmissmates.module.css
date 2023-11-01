@@ -1,0 +1,109 @@
+.addmissmate_container {
+  background-color: #212832;
+  border-radius: 25px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  display: flex;
+  flex-direction: column;
+  height: 60vh;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+  padding: 20px;
+  width: auto;
+  gap: 40px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.btn_primary_add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fcda06;
+  border: none;
+  border-radius: 50px;
+  height: 3rem;
+  margin: 10px;
+  width: 80%;
+}
+
+.btn_primary_add,
+a {
+  letter-spacing: 0.2rem;
+  text-decoration: none;
+  color: black;
+  font-size: small;
+  font-weight: bold;
+}
+
+.btn_back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fcda06;
+  border: none;
+  border-radius: 50px;
+
+  margin: 100%px;
+  width: fit-content;
+}
+
+.inputBox {
+  position: relative;
+}
+
+.inputBox input {
+  width: 100%;
+  padding: 5px;
+  height: 3rem;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 7px;
+  background-color: #212832;
+  outline: none;
+  color: white;
+  font-size: 1em;
+  font-family: "Helvetica Now Text";
+  transition: 0.5s;
+}
+
+.inputBox span {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  padding: 10px;
+  pointer-events: none;
+  text-transform: uppercase;
+  color: rgb(246, 246, 246);
+  font-size: 0.8em;
+  transition: 0.2s ease-out;
+}
+
+.inputBox input:valid ~ span,
+.inputBox input:focus ~ span {
+  color: #fcda06;
+  transform: translateX(10px) translateY(-13px);
+  font-size: 0.8em;
+  padding: 2px 10px;
+  background-color: #212832;
+  border-left: 1px solid #fcda06;
+  border-right: 1px solid #fcda06;
+  letter-spacing: 0.1em;
+}
+.inputBox:nth-child(3) input:valid ~ span,
+.inputBox:nth-child(3) input:focus ~ span {
+  background: #fcda06;
+  color: #212832;
+  border-radius: 5px;
+}
+
+.inputBox input:valid,
+.inputBox input:focus {
+  border: 1px solid #fcda06;
+}

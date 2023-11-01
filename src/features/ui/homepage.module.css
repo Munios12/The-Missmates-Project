@@ -1,0 +1,36 @@
+.homepage_section {
+  background-color: #212832;
+  border-radius: 25px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  display: flex;
+  flex-direction: column;
+  height: 60vh;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+  padding: 20px;
+  width: auto;
+}
+
+.btn_primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fcda06;
+  border: 0;
+  border-radius: 50px;
+  height: 4rem;
+  margin: 15px;
+  padding: 10px;
+  width: 90%;
+}
+
+.btn_primary,
+a {
+  letter-spacing: 0.2rem;
+  text-decoration: none;
+  color: black;
+  font-size: large;
+  font-weight: bold;
+}
