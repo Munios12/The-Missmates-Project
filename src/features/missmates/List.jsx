@@ -1,25 +1,29 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getMissmates } from "../../services/apiMissmates";
+import { loadMissmates } from "./missmatesSlice";
+// import { getMissmates } from "../../services/apiMissmates";
 
 function List() {
-  // const newMissmate = {
-  //   id: 222,
-  //   created_at: new Date(),
-  //   pie: "derecho",
-  //   talla: "25",
-  //   modelo: "BV1789-400",
-  //   bin: 5,
-  // };
+  const [listOfMissmates, setListOfMissmates] = useState([]);
+  const dispatch = useDispatch();
+  const { missmates } = useSelector((store) => store.missmates);
+
   useEffect(() => {
-    getMissmates().then((data) => console.log(data));
-    // createMissmate(newMissmate);
+    dispatch(loadMissmates());
+    setListOfMissmates(missmates);
+    console.log(listOfMissmates);
   }, []);
 
   return (
     <>
       <Link to="/">Atras</Link>
+
       <div>List of missmates</div>
+
+      {listOfMissmates.map((missmate) => (
+        <p key={missmate.id}>{missmate.modelo}</p>
+      ))}
     </>
   );
 }
