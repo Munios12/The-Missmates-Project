@@ -11,7 +11,7 @@
   margin: 30px;
   padding: 20px;
   width: auto;
-  gap: 40px;
+  gap: 30px;
 }
 
 .form {
@@ -50,9 +50,9 @@ a {
   background-color: #fcda06;
   border: none;
   border-radius: 50px;
-
-  margin: 100%px;
-  width: fit-content;
+  padding: 4px;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
 }
 
 .inputBox {

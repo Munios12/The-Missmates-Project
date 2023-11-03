@@ -1,29 +1,44 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { loadMissmates } from "./missmatesSlice";
+import { getMissmates } from "../../services/apiMissmates";
+import styles from "./list.module.css";
 
 function List() {
   const [listOfMissmates, setListOfMissmates] = useState([]);
-  const dispatch = useDispatch();
-  const { missmates } = useSelector((store) => store.missmates);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    dispatch(loadMissmates());
-    setListOfMissmates(missmates);
-    console.log(listOfMissmates);
+    setIsLoading(true);
+    getMissmates().then((miss) => setListOfMissmates(miss));
+    setIsLoading(false);
   }, []);
-
+  console.log(listOfMissmates);
   return (
-    <>
-      <Link to="/">Atras</Link>
+    <section className={styles.list__container}>
+      <div className={styles.move_left_arrow}>
+        <Link to="/" className={styles.btn_back}>
+          &larr;
+        </Link>
+      </div>
 
-      <div>List of missmates</div>
-
-      {listOfMissmates.map((missmate) => (
-        <p key={missmate.id}>{missmate.modelo}</p>
-      ))}
-    </>
+      <ul className={styles.move_left}>
+        {isLoading
+          ? "Cargando los missmates..."
+          : listOfMissmates.map((missmate) => (
+              <li key={missmate.id} className={styles.missmate_container}>
+                <div>
+                  <p>Pie: {missmate.pie}</p>
+                  <p>Talla: {missmate.talla}</p>
+                  <p>Modelo: {missmate.modelo}</p>
+                  <p>Bin: {missmate.bin}</p>
+                </div>
+                <div className={styles.center_btn}>
+                  <button className={styles.btn_delete}>Borrar</button>
+                </div>
+              </li>
+            ))}
+      </ul>
+    </section>
   );
 }
 
