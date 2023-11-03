@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { loadMissmates } from "./missmatesSlice";
-// import { getMissmates } from "../../services/apiMissmates";
+// import { loadMissmates } from "./missmatesSlice";
 
 function List() {
   const [listOfMissmates, setListOfMissmates] = useState([]);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { missmates } = useSelector((store) => store.missmates);
 
   useEffect(() => {
-    dispatch(loadMissmates());
     setListOfMissmates(missmates);
-    console.log(listOfMissmates);
+    console.log(missmates);
   }, []);
 
   return (
