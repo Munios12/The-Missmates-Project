@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styles from "./addmissmates.module.css";
 import { addMissmate } from "./missmatesSlice";
 import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 
 function Addmissmate() {
   const [pie, setFoot] = useState("derecho");
@@ -22,6 +23,13 @@ function Addmissmate() {
     e.preventDefault();
     dispatch(addMissmate(newMissmate));
     console.log(newMissmate);
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Has añadido un missmate",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   }
 
   return (
