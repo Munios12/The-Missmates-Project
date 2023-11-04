@@ -4,6 +4,7 @@ import { getMissmates } from "../../services/apiMissmates";
 import styles from "./list.module.css";
 import { deleteMissmate, loadMissmates } from "./missmatesSlice";
 import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 
 function List() {
   const [listOfMissmates, setListOfMissmates] = useState([]);
@@ -21,9 +22,28 @@ function List() {
   }, []);
 
   function handleDelete(missmateID) {
-    dispatch(deleteMissmate(missmateID));
-    setListOfMissmates((prev) => {
-      return prev.filter((item) => item.id !== missmateID);
+    Swal.fire({
+      title: "Deseas eliminar este missmate?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      denyButtonText: "No",
+      customClass: {
+        actions: "my-actions",
+        cancelButton: "order-1 right-gap",
+        confirmButton: "order-2",
+        denyButton: "order-3",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Saved!", "", "success");
+        dispatch(deleteMissmate(missmateID));
+        setListOfMissmates((prev) => {
+          return prev.filter((item) => item.id !== missmateID);
+        });
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
     });
   }
 

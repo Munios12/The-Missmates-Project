@@ -24,7 +24,7 @@ function Addmissmate() {
     dispatch(addMissmate(newMissmate));
     console.log(newMissmate);
     Swal.fire({
-      position: "top-end",
+      position: "center",
       icon: "success",
       title: "Has añadido un missmate",
       showConfirmButton: false,
