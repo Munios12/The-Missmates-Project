@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./addmissmates.module.css";
+import { addMissmate } from "./missmatesSlice";
+import { useDispatch } from "react-redux";
 
 function Addmissmate() {
   const [pie, setFoot] = useState("derecho");
   const [talla, setSize] = useState();
   const [modelo, setModel] = useState();
-  const [bin, setBin] = useState();
+  const [bin, setBin] = useState("1");
+  const dispatch = useDispatch();
 
   const newMissmate = {
     pie,
@@ -17,6 +20,7 @@ function Addmissmate() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    dispatch(addMissmate(newMissmate));
     console.log(newMissmate);
   }
 
