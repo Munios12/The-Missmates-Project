@@ -1,0 +1,21 @@
+.search_container {
+  background-color: #212832;
+  border-radius: 25px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  height: 60vh;
+  margin: 30px;
+  padding: 20px;
+}
+
+.btn_back {
+  display: flex;
+  justify-content: center;
+  background-color: #ffe643;
+  border: none;
+  border-radius: 15px;
+  padding: 4px;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+  width: 20%;
+}

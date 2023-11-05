@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { getMissmates } from "../../services/apiMissmates";
 import styles from "./list.module.css";
 import { deleteMissmate, loadMissmates } from "./missmatesSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 function List() {
@@ -12,7 +12,8 @@ function List() {
 
   const dispatch = useDispatch();
 
-  // const data = useSelector((state) => state.missmates);
+  const data = useSelector((state) => state.missmates);
+  console.log(data);
 
   useEffect(() => {
     dispatch(loadMissmates());
