@@ -19,11 +19,15 @@
   justify-content: center;
   background-color: #fcda06;
   border: 0;
-  border-radius: 50px;
+  border-radius: 3px;
   height: 4rem;
   margin: 15px;
   padding: 10px;
   width: 90%;
+}
+
+.btn_primary_add:active {
+  background-color: #c7ad06;
 }
 
 .btn_primary,

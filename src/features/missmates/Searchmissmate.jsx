@@ -76,19 +76,34 @@ function Searchmissmate() {
         </Link>
       </div>
       <form onSubmit={handleSubmit} className={styles.form}>
+        <section className={styles.inputBox}>
+          <input
+            name="talla"
+            placeholder="Talla"
+            type="text"
+            required
+            onChange={handleChange}
+          />
+        </section>
+        <section className={styles.inputBox}>
+          <input
+            name="modelo"
+            placeholder="Modelo"
+            type="text"
+            required
+            onChange={handleChange}
+          />
+        </section>
         <section>
-          <select name="pie" value={searchForm.pie} onChange={handleChange}>
+          <select
+            className={styles.select_box}
+            name="pie"
+            value={searchForm.pie}
+            onChange={handleChange}
+          >
             <option value={"derecho"}>Derecho</option>
             <option value={"izquierdo"}>Izquierdo</option>
           </select>
-        </section>
-        <section className={styles.inputBox}>
-          <input name="talla" type="text" required onChange={handleChange} />
-          <span>Talla</span>
-        </section>
-        <section className={styles.inputBox}>
-          <input name="modelo" type="text" required onChange={handleChange} />
-          <span>Modelo</span>
         </section>
         <button className={styles.btn_primary_add}>BUSCAR</button>
       </form>
