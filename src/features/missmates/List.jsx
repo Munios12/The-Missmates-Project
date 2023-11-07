@@ -62,9 +62,9 @@ function List() {
           : listOfMissmates.map((missmate) => (
               <li key={missmate.id} className={styles.missmate_container}>
                 <div>
-                  <p>Pie: {missmate.pie}</p>
                   <p>Talla: {missmate.talla}</p>
                   <p>Modelo: {missmate.modelo}</p>
+                  <p>Pie: {missmate.pie}</p>
                   <p>Bin: {missmate.bin}</p>
                 </div>
                 <div className={styles.center_btn}>

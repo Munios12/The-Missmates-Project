@@ -40,8 +40,28 @@ function Addmissmate() {
             Atras
           </Link>
           <form onSubmit={handleSubmit} className={styles.form}>
-            <section>
+            <section className={styles.inputBox}>
+              <input
+                placeholder="Talla"
+                type="number"
+                required
+                value={talla}
+                onChange={(e) => setSize(e.target.value)}
+              />
+              {/* <label>Talla</label> */}
+            </section>
+            <section className={styles.inputBox}>
+              <input
+                placeholder="Modelo"
+                type="text"
+                required
+                onChange={(e) => setModel(e.target.value)}
+              />
+              {/* <label>Modelo</label> */}
+            </section>
+            <section className={styles.options}>
               <select
+                className={styles.select_box}
                 name="pie"
                 value={pie}
                 onChange={(e) => setFoot(e.target.value)}
@@ -50,25 +70,12 @@ function Addmissmate() {
                 <option value={"izquierdo"}>Izquierdo</option>
               </select>
             </section>
-            <section className={styles.inputBox}>
-              <input
-                type="number"
-                required
-                value={talla}
-                onChange={(e) => setSize(e.target.value)}
-              />
-              <span>Talla</span>
-            </section>
-            <section className={styles.inputBox}>
-              <input
-                type="text"
-                required
-                onChange={(e) => setModel(e.target.value)}
-              />
-              <span>Modelo</span>
-            </section>
-            <section>
-              <select name="bin" onChange={(e) => setBin(e.target.value)}>
+            <section className={styles.options}>
+              <select
+                className={styles.select_box}
+                name="bin"
+                onChange={(e) => setBin(e.target.value)}
+              >
                 <option value={"1"}>MENS BIN 1</option>
                 <option value={"2"}>WOMENS BIN 2</option>
                 <option value={"3"}>KIDS BIN 3</option>

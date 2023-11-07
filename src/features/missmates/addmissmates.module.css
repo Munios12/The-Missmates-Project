@@ -20,6 +20,7 @@
   align-items: center;
   justify-content: space-around;
   gap: 20px;
+  width: 80%;
 }
 
 .btn_primary_add {
@@ -55,7 +56,8 @@ a {
   letter-spacing: 0.1rem;
 }
 
-.inputBox {
+/*---------------------inputs styles---------------------*/
+/* .inputBox {
   position: relative;
 }
 
@@ -106,4 +108,60 @@ a {
 .inputBox input:valid,
 .inputBox input:focus {
   border: 1px solid #fcda06;
+} */
+
+.inputBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 30px;
+  width: 100%;
+}
+
+.inputBox input {
+  background-color: #212832;
+  color: rgb(217, 209, 209);
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: 1em;
+  outline: none;
+  border-bottom: 2px solid white;
+}
+
+/* .inputBox label {
+  position: absolute;
+  bottom: 10px;
+  left: 0px;
+  color: white;
+  pointer-events: none;
+  transition: all 0.3s ease;
+} */
+
+/* .inputBox input:focus ~ label,
+.inputBox input:valid ~ label {
+  transform: translateY(-20px);
+  font-size: 0.9em;
+  color: #fcda06;
+} */
+
+.options {
+  /* padding: 60px 100px 0px 100px; */
+  display: flex;
+  justify-content: centerd;
+}
+
+.select_box {
+  border: none;
+  appearance: none;
+  padding: 8px 8px 8px 10px;
+  width: 100%;
+  color: rgb(215, 211, 211);
+  background-color: #3d495b;
+  font-size: 1em;
+  outline: none;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-family: "Helvetica Now Text";
+  width: 250px;
 }
