@@ -10,6 +10,7 @@ function Addmissmate() {
   const [talla, setSize] = useState();
   const [modelo, setModel] = useState();
   const [bin, setBin] = useState("1");
+  const [quantity, setQuantity] = useState("1");
   const dispatch = useDispatch();
 
   const newMissmate = {
@@ -19,10 +20,14 @@ function Addmissmate() {
     bin,
   };
 
+  const addMissFunc = function handleAddMissmate() {
+    dispatch(addMissmate(newMissmate));
+  };
+
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(addMissmate(newMissmate));
-    console.log(newMissmate);
+    Array.from({ length: quantity }, () => addMissFunc());
+    console.log("quantity", quantity);
     Swal.fire({
       position: "center",
       icon: "success",
@@ -36,9 +41,11 @@ function Addmissmate() {
     <>
       <main>
         <section className={styles.addmissmate_container}>
-          <Link to="/" className={styles.btn_back}>
-            Atras
-          </Link>
+          <div className={styles.move_left_arrow}>
+            <Link to="/" className={styles.btn_back}>
+              &larr;
+            </Link>
+          </div>
           <form onSubmit={handleSubmit} className={styles.form}>
             <section className={styles.inputBox}>
               <input
@@ -48,7 +55,6 @@ function Addmissmate() {
                 value={talla}
                 onChange={(e) => setSize(e.target.value)}
               />
-              {/* <label>Talla</label> */}
             </section>
             <section className={styles.inputBox}>
               <input
@@ -57,7 +63,6 @@ function Addmissmate() {
                 required
                 onChange={(e) => setModel(e.target.value)}
               />
-              {/* <label>Modelo</label> */}
             </section>
             <section className={styles.options}>
               <select
@@ -81,7 +86,20 @@ function Addmissmate() {
                 <option value={"3"}>KIDS BIN 3</option>
               </select>
             </section>
-            <button className={styles.btn_primary_add}>AÑADIR</button>
+            <div className={styles.btn_add_quantity}>
+              <button className={styles.btn_primary_add}>AÑADIR</button>
+              <select
+                name="quantity"
+                className={styles.select_box_quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+              >
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
           </form>
         </section>
       </main>
