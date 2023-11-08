@@ -26,6 +26,9 @@ function List() {
           <option value="WOMENS 2">WOMENS 2</option>
           <option value="KIDS 3">KIDS 3</option>
         </select>
+        <div>
+          <p>Missmates: X unit/s</p>
+        </div>
       </div>
       <MissmatesFiltered sortBy={sortBy} />
     </section>
