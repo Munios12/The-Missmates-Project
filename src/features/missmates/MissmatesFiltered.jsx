@@ -17,9 +17,6 @@ function MissmatesFiltered({ sortBy }) {
     console.log("Evitar muchos renders");
   }, [sortBy]);
 
-  console.log(sortBy);
-  console.log(filteredList);
-
   function handlefilteredBin(filter) {
     let newFilteredArray;
     if (filter === "FULL") {
@@ -32,7 +29,6 @@ function MissmatesFiltered({ sortBy }) {
       newFilteredArray = listOfAllMissmates.filter(
         (item) => item.bin === "MENS 1"
       );
-
       setFilteredBin(newFilteredArray);
     }
 
@@ -43,8 +39,6 @@ function MissmatesFiltered({ sortBy }) {
       newFilteredArray = listOfAllMissmates.filter(
         (item) => item.bin === "WOMENS 2"
       );
-
-      console.log(newFilteredArray);
       setFilteredBin(newFilteredArray);
     }
 
@@ -55,7 +49,6 @@ function MissmatesFiltered({ sortBy }) {
       newFilteredArray = listOfAllMissmates.filter(
         (item) => item.bin === "KIDS 3"
       );
-
       setFilteredBin(newFilteredArray);
     }
   }
