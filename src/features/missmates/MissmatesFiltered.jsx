@@ -5,9 +5,9 @@ import { getMissmates } from "../../services/apiMissmates";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 
-function MissmatesFiltered({ sortBy }) {
+function MissmatesFiltered({ sortBy, filteredList, setFilteredList }) {
   const [listOfAllMissmates, setListOfAllMissmates] = useState([]);
-  const [filteredList, setFilteredBin] = useState(null);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function MissmatesFiltered({ sortBy }) {
   function handlefilteredBin(filter) {
     let newFilteredArray;
     if (filter === "FULL") {
-      setFilteredBin(listOfAllMissmates);
+      setFilteredList(listOfAllMissmates);
     }
     if (
       filter === "MENS 1" &&
@@ -29,7 +29,7 @@ function MissmatesFiltered({ sortBy }) {
       newFilteredArray = listOfAllMissmates.filter(
         (item) => item.bin === "MENS 1"
       );
-      setFilteredBin(newFilteredArray);
+      setFilteredList(newFilteredArray);
     }
 
     if (
@@ -39,7 +39,7 @@ function MissmatesFiltered({ sortBy }) {
       newFilteredArray = listOfAllMissmates.filter(
         (item) => item.bin === "WOMENS 2"
       );
-      setFilteredBin(newFilteredArray);
+      setFilteredList(newFilteredArray);
     }
 
     if (
@@ -49,7 +49,7 @@ function MissmatesFiltered({ sortBy }) {
       newFilteredArray = listOfAllMissmates.filter(
         (item) => item.bin === "KIDS 3"
       );
-      setFilteredBin(newFilteredArray);
+      setFilteredList(newFilteredArray);
     }
   }
 
@@ -78,7 +78,7 @@ function MissmatesFiltered({ sortBy }) {
         // REFACTORRRR IFFF ANIDADO
 
         if (filteredList === null) return;
-        setFilteredBin((prev) => {
+        setFilteredList((prev) => {
           return prev.filter((item) => item.id !== missmateID);
         });
       } else if (result.isDenied) {
@@ -93,10 +93,18 @@ function MissmatesFiltered({ sortBy }) {
         ? listOfAllMissmates.map((missmate) => (
             <li key={missmate.id} className={styles.missmate_container}>
               <div>
-                <p>Talla: {missmate.talla}</p>
-                <p>Modelo: {missmate.modelo}</p>
-                <p>Pie: {missmate.pie}</p>
-                <p>Bin: {missmate.bin}</p>
+                <p className={styles.missmate_params}>
+                  Talla: <span>{missmate.talla}</span>
+                </p>
+                <p className={styles.missmate_params}>
+                  Modelo: <span>{missmate.modelo}</span>
+                </p>
+                <p className={styles.missmate_params}>
+                  Pie: <span>{missmate.pie}</span>
+                </p>
+                <p className={styles.missmate_params}>
+                  Bin: <span>{missmate.bin}</span>
+                </p>
               </div>
               <div className={styles.center_btn}>
                 <button

@@ -25,11 +25,11 @@ function Searchmissmate() {
 
     const result = missmateListToCheck.filter(
       (item) =>
-        item.modelo === missmateToFind.modelo &&
+        item.modelo.toUpperCase() === missmateToFind.modelo.toUpperCase() &&
         item.pie === missmateToFind.pie &&
         Number(item.talla) === Number(missmateToFind.talla)
     );
-
+    console.log(missmateToFind.modelo);
     console.log(result);
 
     return result.length > 0

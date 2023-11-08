@@ -45,26 +45,38 @@
 .missmate_container {
   display: flex;
   justify-content: space-between;
-  background-color: rgb(254, 254, 254);
-  padding: 10px;
-  margin: 10px 0px;
-  border-radius: 10px;
+  background-color: #3d495b;
+  color: white;
+  padding: 9px;
+  margin: 10px 0px 0px 0px;
+  border-radius: 4px;
   list-style: none;
   width: 100%;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
+.missmate_params {
+  color: rgb(2, 2, 2);
+  font-weight: bolder;
+}
+
+.missmate_params span {
+  color: rgb(220, 215, 215);
+  font-weight: normal;
+}
+
 .btn_delete {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(255, 110, 81);
+  background-color: rgb(202, 105, 105);
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-  border-radius: 15px;
+  border-radius: 3px;
   padding: 5px 10px;
   border: none;
+  font-weight: 600;
   letter-spacing: 0.1rem;
   height: fit-content;
 }

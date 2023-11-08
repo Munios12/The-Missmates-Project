@@ -7,11 +7,13 @@ import { useSelector } from "react-redux";
 
 function List() {
   const [sortBy, setSortBy] = useState("VER TODOS");
-
-  // const [filteredBin, setFilteredBin] = useState(listOfMissmates);
+  const [filteredList, setFilteredList] = useState(null);
 
   const data = useSelector((state) => state.missmates);
-  console.log(data);
+
+  const filteredNumberMissmates = !filteredList
+    ? data.missmates.length
+    : filteredList?.length;
 
   return (
     <section className={styles.list__container}>
@@ -29,10 +31,14 @@ function List() {
         </select>
 
         <p className={styles.missmates_units}>
-          Nº: {data.missmates.length} unit/s
+          Nº: {filteredNumberMissmates} unit/s
         </p>
       </div>
-      <MissmatesFiltered sortBy={sortBy} />
+      <MissmatesFiltered
+        sortBy={sortBy}
+        filteredList={filteredList}
+        setFilteredList={setFilteredList}
+      />
     </section>
   );
 }
