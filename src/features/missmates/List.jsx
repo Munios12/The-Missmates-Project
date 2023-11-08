@@ -1,52 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { getMissmates } from "../../services/apiMissmates";
 import styles from "./list.module.css";
-import { deleteMissmate, loadMissmates } from "./missmatesSlice";
-import { useDispatch, useSelector } from "react-redux";
-import Swal from "sweetalert2";
+
+import MissmatesFiltered from "./MissmatesFiltered";
 
 function List() {
-  const [listOfMissmates, setListOfMissmates] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [sortBy, setSortBy] = useState("VER TODOS");
 
-  const dispatch = useDispatch();
+  // const [filteredBin, setFilteredBin] = useState(listOfMissmates);
 
-  const data = useSelector((state) => state.missmates);
-  console.log(data);
-
-  useEffect(() => {
-    dispatch(loadMissmates());
-    setIsLoading(true);
-    getMissmates().then((miss) => setListOfMissmates(miss));
-    setIsLoading(false);
-  }, []);
-
-  function handleDelete(missmateID) {
-    Swal.fire({
-      title: "Deseas eliminar este missmate?",
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: "Yes",
-      denyButtonText: "No",
-      customClass: {
-        actions: "my-actions",
-        cancelButton: "order-1 right-gap",
-        confirmButton: "order-2",
-        denyButton: "order-3",
-      },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Saved!", "", "success");
-        dispatch(deleteMissmate(missmateID));
-        setListOfMissmates((prev) => {
-          return prev.filter((item) => item.id !== missmateID);
-        });
-      } else if (result.isDenied) {
-        Swal.fire("Changes are not saved", "", "info");
-      }
-    });
-  }
+  // const data = useSelector((state) => state.missmates);
+  // console.log(data);
 
   return (
     <section className={styles.list__container}>
@@ -55,29 +19,15 @@ function List() {
           &larr;
         </Link>
       </div>
-
-      <ul className={styles.move_left}>
-        {isLoading
-          ? "Cargando los missmates..."
-          : listOfMissmates.map((missmate) => (
-              <li key={missmate.id} className={styles.missmate_container}>
-                <div>
-                  <p>Talla: {missmate.talla}</p>
-                  <p>Modelo: {missmate.modelo}</p>
-                  <p>Pie: {missmate.pie}</p>
-                  <p>Bin: {missmate.bin}</p>
-                </div>
-                <div className={styles.center_btn}>
-                  <button
-                    className={styles.btn_delete}
-                    onClick={() => handleDelete(missmate.id)}
-                  >
-                    Borrar
-                  </button>
-                </div>
-              </li>
-            ))}
-      </ul>
+      <div className={styles.filter_actions}>
+        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <option value="FULL">VER TODOS</option>
+          <option value="MENS 1">MENS 1</option>
+          <option value="WOMENS 2">WOMENS 2</option>
+          <option value="KIDS 3">KIDS 3</option>
+        </select>
+      </div>
+      <MissmatesFiltered sortBy={sortBy} />
     </section>
   );
 }

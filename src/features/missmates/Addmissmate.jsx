@@ -9,7 +9,7 @@ function Addmissmate() {
   const [pie, setFoot] = useState("derecho");
   const [talla, setSize] = useState();
   const [modelo, setModel] = useState();
-  const [bin, setBin] = useState("1");
+  const [bin, setBin] = useState("MENS 1");
   const [quantity, setQuantity] = useState("1");
   const dispatch = useDispatch();
 
@@ -81,9 +81,9 @@ function Addmissmate() {
                 name="bin"
                 onChange={(e) => setBin(e.target.value)}
               >
-                <option value={"1"}>MENS BIN 1</option>
-                <option value={"2"}>WOMENS BIN 2</option>
-                <option value={"3"}>KIDS BIN 3</option>
+                <option value={"MENS 1"}>MENS BIN 1</option>
+                <option value={"WOMENS 2"}>WOMENS BIN 2</option>
+                <option value={"KIDS 3"}>KIDS BIN 3</option>
               </select>
             </section>
             <div className={styles.btn_add_quantity}>
