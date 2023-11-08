@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import styles from "./list.module.css";
 
 import MissmatesFiltered from "./MissmatesFiltered";
+import { useSelector } from "react-redux";
 
 function List() {
   const [sortBy, setSortBy] = useState("VER TODOS");
 
   // const [filteredBin, setFilteredBin] = useState(listOfMissmates);
 
-  // const data = useSelector((state) => state.missmates);
-  // console.log(data);
+  const data = useSelector((state) => state.missmates);
+  console.log(data);
 
   return (
     <section className={styles.list__container}>
@@ -26,9 +27,10 @@ function List() {
           <option value="WOMENS 2">WOMENS 2</option>
           <option value="KIDS 3">KIDS 3</option>
         </select>
-        <div>
-          <p>Missmates: X unit/s</p>
-        </div>
+
+        <p className={styles.missmates_units}>
+          Nº: {data.missmates.length} unit/s
+        </p>
       </div>
       <MissmatesFiltered sortBy={sortBy} />
     </section>

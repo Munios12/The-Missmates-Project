@@ -69,6 +69,19 @@
   height: fit-content;
 }
 
+.filter_actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.missmates_units {
+  color: rgb(185, 185, 185);
+  font-size: 0.8em;
+}
+
 /*-----DELETING ANIMATION-------*/
 .fade_out {
   display: none;
