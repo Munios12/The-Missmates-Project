@@ -70,9 +70,14 @@ function MissmatesFiltered({ sortBy }) {
       if (result.isConfirmed) {
         Swal.fire("Saved!", "", "success");
         dispatch(deleteMissmate(missmateID));
+
         setListOfAllMissmates((prev) => {
           return prev.filter((item) => item.id !== missmateID);
         });
+
+        // REFACTORRRR IFFF ANIDADO
+
+        if (filteredList === null) return;
         setFilteredBin((prev) => {
           return prev.filter((item) => item.id !== missmateID);
         });
