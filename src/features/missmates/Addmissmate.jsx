@@ -9,7 +9,7 @@ function Addmissmate() {
   const [pie, setFoot] = useState("derecho");
   const [talla, setSize] = useState();
   const [modelo, setModel] = useState();
-  const [bin, setBin] = useState("MENS 1");
+  const [bin, setBin] = useState("MENS BALDA 1");
   const [quantity, setQuantity] = useState("1");
   const dispatch = useDispatch();
 
@@ -23,6 +23,8 @@ function Addmissmate() {
   const addMissFunc = function handleAddMissmate() {
     dispatch(addMissmate(newMissmate));
   };
+
+  const genderBaldasToAddArr = [1, 2, 3, 4, 5, 6, 7];
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -81,9 +83,27 @@ function Addmissmate() {
                 name="bin"
                 onChange={(e) => setBin(e.target.value)}
               >
-                <option value={"MENS 1"}>MENS BIN 1</option>
+                {/* <option value={"MENS 1"}>MENS BIN 1</option>
                 <option value={"WOMENS 2"}>WOMENS BIN 2</option>
-                <option value={"KIDS 3"}>KIDS BIN 3</option>
+                <option value={"KIDS 3"}>KIDS BIN 3</option> */}
+                {genderBaldasToAddArr.map((i) => (
+                  <option
+                    key={i}
+                    value={`MENS BALDA ${i}`}
+                  >{`MENS BALDA ${i}`}</option>
+                ))}
+                {genderBaldasToAddArr.map((i) => (
+                  <option
+                    key={i}
+                    value={`WOMENS BALDA ${i}`}
+                  >{`WOMENS BALDA ${i}`}</option>
+                ))}
+                {genderBaldasToAddArr.map((i) => (
+                  <option
+                    key={i}
+                    value={`KIDS BALDA ${i}`}
+                  >{`KIDS BALDA ${i}`}</option>
+                ))}
               </select>
             </section>
             <div className={styles.btn_add_quantity}>
