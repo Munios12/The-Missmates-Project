@@ -6,7 +6,7 @@ import MissmatesFiltered from "./MissmatesFiltered";
 import { useSelector } from "react-redux";
 
 function List() {
-  const [sortBy, setSortBy] = useState("VER TODOS");
+  const [sortBy, setSortBy] = useState("FULL");
   const [filteredList, setFilteredList] = useState(null);
 
   const data = useSelector((state) => state.missmates);
@@ -24,7 +24,7 @@ function List() {
       </div>
       <div className={styles.filter_actions}>
         <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-          <option value="FULL">VER TODOS</option>
+          <option value="VER TODOS">VER TODOS</option>
           <option value="MENS 1">MENS 1</option>
           <option value="WOMENS 2">WOMENS 2</option>
           <option value="KIDS 3">KIDS 3</option>

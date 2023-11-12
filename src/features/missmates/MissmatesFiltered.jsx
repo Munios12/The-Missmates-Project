@@ -4,6 +4,7 @@ import { deleteMissmate, loadMissmates } from "./missmatesSlice";
 import { getMissmates } from "../../services/apiMissmates";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
+import { Icon } from "@iconify/react";
 
 function MissmatesFiltered({ sortBy, filteredList, setFilteredList }) {
   const [listOfAllMissmates, setListOfAllMissmates] = useState([]);
@@ -19,9 +20,11 @@ function MissmatesFiltered({ sortBy, filteredList, setFilteredList }) {
 
   function handlefilteredBin(filter) {
     let newFilteredArray;
-    if (filter === "FULL") {
-      setFilteredList(listOfAllMissmates);
+
+    if (filter === "VER TODOS") {
+      return setFilteredList(listOfAllMissmates);
     }
+
     if (
       filter === "MENS 1" &&
       listOfAllMissmates.some((item) => item.bin === "MENS 1")
@@ -29,7 +32,7 @@ function MissmatesFiltered({ sortBy, filteredList, setFilteredList }) {
       newFilteredArray = listOfAllMissmates.filter(
         (item) => item.bin === "MENS 1"
       );
-      setFilteredList(newFilteredArray);
+      return setFilteredList(newFilteredArray);
     }
 
     if (
@@ -39,17 +42,22 @@ function MissmatesFiltered({ sortBy, filteredList, setFilteredList }) {
       newFilteredArray = listOfAllMissmates.filter(
         (item) => item.bin === "WOMENS 2"
       );
-      setFilteredList(newFilteredArray);
+      return setFilteredList(newFilteredArray);
+    } else if (
+      filter === "WOMENS 2" &&
+      !listOfAllMissmates.some((item) => item.bin === "WOMENS 2")
+    ) {
+      return setFilteredList([]);
     }
 
     if (
       filter === "KIDS 3" &&
-      listOfAllMissmates.some((item) => item.bin === "WOMENS 2")
+      listOfAllMissmates.some((item) => item.bin === "KIDS 3")
     ) {
       newFilteredArray = listOfAllMissmates.filter(
         (item) => item.bin === "KIDS 3"
       );
-      setFilteredList(newFilteredArray);
+      return setFilteredList(newFilteredArray);
     }
   }
 
@@ -89,7 +97,7 @@ function MissmatesFiltered({ sortBy, filteredList, setFilteredList }) {
 
   return (
     <ul className={styles.move_left}>
-      {!filteredList
+      {filteredList === null
         ? listOfAllMissmates.map((missmate) => (
             <li key={missmate.id} className={styles.missmate_container}>
               <div>
@@ -111,7 +119,7 @@ function MissmatesFiltered({ sortBy, filteredList, setFilteredList }) {
                   className={styles.btn_delete}
                   onClick={() => handleDelete(missmate.id)}
                 >
-                  Borrar
+                  <Icon icon="bi:trash3-fill" />
                 </button>
               </div>
             </li>
@@ -119,17 +127,25 @@ function MissmatesFiltered({ sortBy, filteredList, setFilteredList }) {
         : filteredList.map((missmate) => (
             <li key={missmate.id} className={styles.missmate_container}>
               <div>
-                <p>Talla: {missmate.talla}</p>
-                <p>Modelo: {missmate.modelo}</p>
-                <p>Pie: {missmate.pie}</p>
-                <p>Bin: {missmate.bin}</p>
+                <p className={styles.missmate_params}>
+                  Talla: <span>{missmate.talla}</span>
+                </p>
+                <p className={styles.missmate_params}>
+                  Modelo: <span>{missmate.modelo}</span>
+                </p>
+                <p className={styles.missmate_params}>
+                  Pie: <span>{missmate.pie}</span>
+                </p>
+                <p className={styles.missmate_params}>
+                  Bin: <span>{missmate.bin}</span>
+                </p>
               </div>
               <div className={styles.center_btn}>
                 <button
                   className={styles.btn_delete}
                   onClick={() => handleDelete(missmate.id)}
                 >
-                  Borrar
+                  <Icon icon="bi:trash3-fill" />
                 </button>
               </div>
             </li>
