@@ -10,6 +10,30 @@ function MissmatesFiltered({ sortBy, filteredList, setFilteredList }) {
   const [listOfAllMissmates, setListOfAllMissmates] = useState([]);
 
   const dispatch = useDispatch();
+  const filterArrayNames = [
+    "VER TODOS",
+    "MENS BALDA 1",
+    "MENS BALDA 2",
+    "MENS BALDA 3",
+    "MENS BALDA 4",
+    "MENS BALDA 5",
+    "MENS BALDA 6",
+    "MENS BALDA 7",
+    "WOMENS BALDA 1",
+    "WOMENS BALDA 2",
+    "WOMENS BALDA 3",
+    "WOMENS BALDA 4",
+    "WOMENS BALDA 5",
+    "WOMENS BALDA 6",
+    "WOMENS BALDA 7",
+    "KIDS BALDA 1",
+    "KIDS BALDA 2",
+    "KIDS BALDA 3",
+    "KIDS BALDA 4",
+    "KIDS BALDA 5",
+    "KIDS BALDA 6",
+    "KIDS BALDA 7",
+  ];
 
   // const data = useSelector((state) => state.missmates);
 
@@ -17,10 +41,8 @@ function MissmatesFiltered({ sortBy, filteredList, setFilteredList }) {
     dispatch(loadMissmates());
     getMissmates().then((miss) => setListOfAllMissmates(miss));
     handlefilteredBin(sortBy, filterArrayNames);
-    console.log(listOfAllMissmates);
     console.log("Evitar muchos renders");
-  }, []);
-
+  }, [sortBy]);
   // function handlefilteredBin(filter) {
   //   let newFilteredArray;
 
@@ -64,35 +86,11 @@ function MissmatesFiltered({ sortBy, filteredList, setFilteredList }) {
   //   }
   // }
 
-  const filterArrayNames = [
-    "VER TODOS",
-    "MENS BALDA 1",
-    "MENS BALDA 2",
-    "MENS BALDA 3",
-    "MENS BALDA 4",
-    "MENS BALDA 5",
-    "MENS BALDA 6",
-    "MENS BALDA 7",
-    "WOMENS BALDA 1",
-    "WOMENS BALDA 2",
-    "WOMENS BALDA 3",
-    "WOMENS BALDA 4",
-    "WOMENS BALDA 5",
-    "WOMENS BALDA 6",
-    "WOMENS BALDA 7",
-    "KIDS BALDA 1",
-    "KIDS BALDA 2",
-    "KIDS BALDA 3",
-    "KIDS BALDA 4",
-    "KIDS BALDA 5",
-    "KIDS BALDA 6",
-    "KIDS BALDA 7",
-  ];
-
-  function handlefilteredBin(filter = "VER TODOS", filterName) {
+  function handlefilteredBin(filter, filterName) {
     let newFilteredArray;
+
     if (filter === "VER TODOS") {
-      return setFilteredList(listOfAllMissmates);
+      return getMissmates().then((miss) => setFilteredList(miss));
     }
 
     for (let i = 0; i < filterArrayNames.length; i++) {
