@@ -34,7 +34,7 @@ function Searchmissmate() {
 
     return result.length > 0
       ? Swal.fire({
-          title: `Lo tenemos, se encuentra en el bin ${result[0].bin}`,
+          title: `Lo tenemos, se encuentra en ${result[0].bin}! 🥳`,
           showDenyButton: true,
           showCancelButton: true,
           confirmButtonText: "Yes",

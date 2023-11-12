@@ -110,6 +110,7 @@ a {
   font-size: 1em;
   outline: none;
   border-bottom: 2px solid white;
+  border-radius: 0px;
 }
 
 .options {
