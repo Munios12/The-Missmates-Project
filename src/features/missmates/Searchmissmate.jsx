@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./searchmissmate.module.css";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { loadMissmates } from "./missmatesSlice";
+import { deleteMissmate, loadMissmates } from "./missmatesSlice";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 
@@ -23,18 +23,18 @@ function Searchmissmate() {
   function searchMissmate(missmateToFind) {
     const missmateListToCheck = data.missmates;
 
-    const result = missmateListToCheck.filter(
+    const missmateFinded = missmateListToCheck.filter(
       (item) =>
         item.modelo.toUpperCase() === missmateToFind.modelo.toUpperCase() &&
         item.pie === missmateToFind.pie &&
         Number(item.talla) === Number(missmateToFind.talla)
     );
     console.log(missmateToFind.modelo);
-    console.log(result);
+    console.log(missmateFinded);
 
-    return result.length > 0
+    return missmateFinded.length > 0
       ? Swal.fire({
-          title: `Lo tenemos, se encuentra en ${result[0].bin}! 🥳`,
+          title: `Lo tenemos, se encuentra en ${missmateFinded[0].bin}! 🥳. Deseas eliminarlo ?`,
           showDenyButton: true,
           showCancelButton: true,
           confirmButtonText: "Yes",
@@ -45,6 +45,17 @@ function Searchmissmate() {
             confirmButton: "order-2",
             denyButton: "order-3",
           },
+        }).then((result) => {
+          if (result.isConfirmed) {
+            dispatch(deleteMissmate(missmateFinded[0].id));
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Se ha eliminado un missmate encontrado. Buen trabajo !",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
         })
       : Swal.fire({
           position: "center",

@@ -44,7 +44,6 @@ export function addMissmate(newMissmate) {
     if (error) {
       throw new Error("No se ha podido añadir el missmate");
     }
-    console.log(data);
     dispatch({ type: "missmates/addMissmates", payload: data });
   };
 }

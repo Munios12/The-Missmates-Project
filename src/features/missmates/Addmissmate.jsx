@@ -1,8 +1,8 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./addmissmates.module.css";
-import { addMissmate } from "./missmatesSlice";
-import { useDispatch } from "react-redux";
+import { addMissmate, deleteMissmate, loadMissmates } from "./missmatesSlice";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 function Addmissmate() {
@@ -13,12 +13,16 @@ function Addmissmate() {
   const [quantity, setQuantity] = useState("1");
   const dispatch = useDispatch();
 
-  const newMissmate = {
-    pie,
-    talla,
-    modelo,
-    bin,
-  };
+  const data = useSelector((state) => state.missmates);
+
+  const newMissmate = React.useMemo(() => {
+    return {
+      pie,
+      talla,
+      modelo,
+      bin,
+    };
+  }, [bin, modelo, talla, pie]);
 
   const addMissFunc = function handleAddMissmate() {
     dispatch(addMissmate(newMissmate));
@@ -26,17 +30,85 @@ function Addmissmate() {
 
   const genderBaldasToAddArr = [1, 2, 3, 4, 5, 6, 7];
 
+  useEffect(() => {
+    dispatch(loadMissmates());
+    console.log("hi, from addmissmate");
+  }, [newMissmate, dispatch]);
+
   function handleSubmit(e) {
     e.preventDefault();
-    Array.from({ length: quantity }, () => addMissFunc());
-    console.log("quantity", quantity);
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Has añadido un missmate",
-      showConfirmButton: false,
-      timer: 1500,
-    });
+    dispatch(loadMissmates());
+    //Buscar Missamate
+    if (searchMissmate(newMissmate)) {
+      dispatch(loadMissmates());
+      return searchMissmate(newMissmate);
+    } else {
+      Array.from({ length: quantity }, () => addMissFunc());
+
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Has añadido un missmate",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+    //Eliminar el missmate si lo encuentra
+
+    //Si no encuentra Missmate lo añade
+  }
+
+  function searchMissmate(missmateToFind) {
+    const missmateListToCheck = data.missmates;
+    console.log(missmateListToCheck);
+
+    const missmateFinded = missmateListToCheck.filter(
+      (item) =>
+        item.modelo.toUpperCase() === missmateToFind.modelo.toUpperCase() &&
+        item.pie !== missmateToFind.pie &&
+        Number(item.talla) === Number(missmateToFind.talla)
+    );
+    console.log("result ----> ", missmateFinded);
+
+    return missmateFinded.length > 0
+      ? Swal.fire({
+          title: `Se encuentra en ${missmateFinded[0].bin} pero... es probable que no lo hayas encontrado, que quieres hacer ?`,
+          subtitle: "Deseas añadirlo o borrar los dos",
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: "Añadir",
+          denyButtonText: "Borrar los dos",
+          customClass: {
+            actions: "my-actions",
+            cancelButton: "order-1 right-gap",
+            confirmButton: "order-2",
+            denyButton: "order-3",
+          },
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire("Añadido!", "", "success");
+            Array.from({ length: quantity }, () => addMissFunc());
+
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Has añadido un missmate",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          } else if (result.isDenied) {
+            //Logica para borrar missmates
+            dispatch(deleteMissmate(missmateFinded[0].id));
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Se ha eliminado un missmate encontrado. Buen trabajo !",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        })
+      : null;
   }
 
   return (
